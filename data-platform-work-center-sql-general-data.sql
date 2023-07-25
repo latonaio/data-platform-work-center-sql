@@ -11,8 +11,9 @@ CREATE TABLE `data_platform_work_center_general_data`
     `WorkCenterUsage`                  varchar(3) DEFAULT NULL,
     `ComponentIsMarkedForBackflush`    tinyint(1) DEFAULT NULL,
     `WorkCenterLocation`               varchar(100) DEFAULT NULL,
-    `CapacityID`                       int(16) DEFAULT NULL,
-    `CapacityCategory`                 varchar(6) DEFAULT NULL,
+    `CapacityCategory`                 varchar(20) NOT NULL,
+    `CapacityQuantityUnit`             varchar(3) NOT NULL,
+    `CapacityQuantity`                 float(15) NOT NULL,
     `ValidityStartDate`                date NOT NULL,
     `ValidityEndDate`                  date NOT NULL,
     `CreationDate`                     date NOT NULL,
@@ -21,7 +22,8 @@ CREATE TABLE `data_platform_work_center_general_data`
     
     PRIMARY KEY (`WorkCenter`),
 
-    CONSTRAINT `DPFMWorkCenterDataPlant_fk` FOREIGN KEY (`BusinessPartner`, `Plant`) REFERENCES `data_platform_plant_general_data` (`BusinessPartner`, `Plant`)
+    CONSTRAINT `DPFMWorkCenterDataPlant_fk` FOREIGN KEY (`BusinessPartner`, `Plant`) REFERENCES `data_platform_plant_general_data` (`BusinessPartner`, `Plant`),
+    CONSTRAINT `DPFMWorkCenterDataProductionCapacityQuantityUnit_fk` FOREIGN KEY (`ProductionCapacityQuantityUnit`) REFERENCES `data_platform_quantity_unit_quantity_unit_data` (`QuantityUnit`)
 
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4;
